@@ -19,11 +19,13 @@ router.post('/login',async(req,res) =>{
     // console.log(req.body)
     try{
         const data = await userHandler.loginUser(req.body);
-        const token = await generateJwt(data);
-        // console.log(token)
-        res.status(200).send({token:token,success:true});
+        if(data){
+            const token = await generateJwt(data);
+            res.status(200).send({token:token,success:true});
+        }
     }catch(error){
-        res.status(500);
+        // console.log("error",error);
+        res.send(error);
     }
 });
 
@@ -32,7 +34,7 @@ router.get('/:userType',async(req,res) =>{
         const data = await userHandler.listStudents(req.params.userType);
         res.status(200).send(data);
     } catch (error) {
-        
+        res.send(error);
     }
 })
 

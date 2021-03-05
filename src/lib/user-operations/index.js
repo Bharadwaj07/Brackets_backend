@@ -12,9 +12,21 @@ const listStudents =async(userType)=>{
     const sudentList = await User.find({userType:userType});
     return sudentList;
 }
-const loginUser = async(userData) =>{
-    const userDoc = await User.findOne({email:userData.email,password:userData.password});
-    return userDoc;
+const loginUser = (userData) =>{
+    return new Promise((resolve,reject) =>{
+        User.findOne({email:userData.email,password:userData.password})
+            .then(result =>{
+                if(result){
+                    resolve(result)
+                }else{
+                    const message = "Invalid user credential"
+                    reject({message:message});
+                }
+            })
+            .catch(err =>{
+                reject(err);
+            })
+    });
 }
 
 
