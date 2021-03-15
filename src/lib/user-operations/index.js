@@ -9,7 +9,7 @@ const registerUser = async(userData) =>{
     return userDoc;
 };
 const listStudents =async(userType)=>{
-    const sudentList = await User.find({userType:userType});
+    const sudentList = await User.find({userType:userType},{password:0});
     return sudentList;
 }
 const loginUser = (userData) =>{

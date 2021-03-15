@@ -22,6 +22,15 @@ router.get('/:owner',async(req,res) =>{
         res.status(500).send(data);
     }
 });
+router.get('/team/:id',async(req,res) =>{
+    try {
+        const data = await teamHandler.getTeam(req.params.id);
+        console.log(data)
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(data);
+    }
+});
 
 router.put('/:id',async(req,res) =>{
     try {
@@ -40,5 +49,14 @@ router.delete('/:id',async(req,res) =>{
         res.status(500).send(data);
     }
 });
+
+router.get('/student/:id',async(req,res) =>{
+    try {
+        const data = await teamHandler.getTeamForStudent(req.params.id);
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(data);
+    }
+})
 
 module.exports = router;

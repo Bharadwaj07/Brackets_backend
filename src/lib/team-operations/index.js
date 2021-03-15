@@ -14,10 +14,17 @@ const modifyTeam = async(id,data) =>{
     return modifiedDoc;
 }
 const listTeam = async(ownerId) =>{
-    const teamLsit = await Team.find({owner:ownerId}).populate('owner').populate('students');
+    const teamLsit = await Team.find({owner:ownerId}).populate('students','-password');
     return teamLsit;
 }
-
+const getTeam = async (id) =>{
+    const team = await (await Team.findOne({_id:id}).populate('owner','-password').populate('students','-password'));
+    return team;
+}
+const getTeamForStudent = async (studentId) =>{
+    const teamList = await Team.find({students:{$all:[studentId]}});
+    return teamList;
+}
 const deleteTeam = async (team_id) =>{
     const deletedTeam = await Team.findOneAndRemove({_id:team_id});
 
@@ -29,4 +36,6 @@ module.exports = {
     modifyTeam,
     listTeam,
     deleteTeam,
+    getTeamForStudent,
+    getTeam
 }

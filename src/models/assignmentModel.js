@@ -13,12 +13,10 @@ const AssignmentSchema = new mongoose.Schema({
     },
     inputSample:{
         type:String,
-        required:true,
         trim:true,
     },
     outputSample:{
         type:String,
-        required:true,
         trim:true,
     },
     language:{
@@ -30,10 +28,10 @@ const AssignmentSchema = new mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:'User'
     },
-    team:[{
+    team:{
         type:mongoose.Types.ObjectId,
         ref:'Team'
-    }],
+    },
 });
 
 const Assignment = mongoose.model('Assignment',AssignmentSchema);
