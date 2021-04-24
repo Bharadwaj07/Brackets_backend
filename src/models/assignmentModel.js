@@ -32,6 +32,25 @@ const AssignmentSchema = new mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:'Team'
     },
+    submission:{
+        type:Date,
+        require:true
+    },
+    maxScore:{
+        type:Number
+    },
+    testCases:[{
+        title:{
+            type:String,
+        },
+        inputs:{
+            type:String,
+        },
+        outputs:{
+            type:String,
+        },
+        _id:false
+    }]
 });
 
 const Assignment = mongoose.model('Assignment',AssignmentSchema);

@@ -19,6 +19,9 @@ const SubmissionSchema = new mongoose.Schema({
     assignmentBody:{
         type:String,
     },
+    submissionDate:{
+        type:Date,
+    },
 });
 
 const Submission = mongoose.model('Submission',SubmissionSchema);

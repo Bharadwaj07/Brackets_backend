@@ -10,6 +10,24 @@ router.get('/:owner',async(req,res) =>{
         res.status(500).send(error);
     }
 });
+router.get('/assignment/:id',async(req,res) =>{
+    try {
+        console.log("assgn ==>",req.params)
+        const data = await assignmentHandler.getAssignment(req.params.id);
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+router.get('/class/:classId',async(req,res) =>{
+    try {
+        console.log("class ==>",req.params)
+        const data = await assignmentHandler.getAssignmentForClass(req.params.classId);
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
 router.get('/student/:id',async(req,res) =>{
     try {
         const data = await assignmentHandler.getAssignmentForStudent(req.params.id);
@@ -29,7 +47,6 @@ router.get('/',async(req,res) =>{
 
 router.post('/',async(req,res) =>{
     try {
-        console.log(req.body)
         const data = await assignmentHandler.createAssignment(req.body);
         res.status(200).send(data);
     } catch (error) {

@@ -1,6 +1,6 @@
 const mongoose  = require('mongoose');
 
-const CommentSchema = new mongoose.Schema({
+const EvaluateSchema = new mongoose.Schema({
     assignment:{
         type:mongoose.Types.ObjectId,
         required:true,
@@ -19,8 +19,11 @@ const CommentSchema = new mongoose.Schema({
     comment:{
         type:String,
     },
+    score:{
+        type:Number
+    }
 });
 
-const Comment = mongoose.model('Comment',CommentSchema);
+const Evaluate = mongoose.model('Evaluate',EvaluateSchema);
 
-module.exports = Comment;
+module.exports = Evaluate;

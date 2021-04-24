@@ -23,8 +23,18 @@ const listSubmission = async(assignmentId) =>{
     return listDoc;
 }
 
+const getSubmissionForStudent = async(assignment,student) =>{
+    const listDoc = await Submission.findOne({assignment,student})
+                                    .populate('assignment')
+                                    .populate('owner')
+                                    .populate('student');
+
+    return listDoc;
+}
+
 module.exports = {
     createSubmission,
     modifySubmission,
-    listSubmission
+    listSubmission,
+    getSubmissionForStudent,
 }

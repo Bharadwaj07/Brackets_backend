@@ -12,9 +12,14 @@ const TeamSchema = new mongoose.Schema({
         ref:'User'
 
     },
+    teamCode:{
+        type:String,
+    },
+    isEnabled:{
+        type:Boolean,
+    },
     students:[{
         type:mongoose.Types.ObjectId,
-        required:true,
         ref:'User'
     }],
 });

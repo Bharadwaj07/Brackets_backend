@@ -1,25 +1,26 @@
 const { Assignment } = require('../../models/index');
 
 const createAssignment = async (data) => {
-    console.log(data);
     const newAssignment = new Assignment({
         ...data
     });
     const assignmentDoc = await newAssignment.save();
-    console.log("success",assignmentDoc)
     return assignmentDoc;
 };
-
+const getAssignment = async (id) => {
+    const assignment = await Assignment.findOne({ _id: id });
+    return assignment;
+};
 const getAssignmentForStudent = async (studentId) =>{
     const resultDoc = await Assignment.find({}).populate({
         path:'team',
-        populate:{
-            path:'students',
-            model:'User',
-            match:studentId
-        }
+        model:'Team',
+        match:{
+            students:{$all:[studentId]}
+        },
     });
-    return resultDoc;
+    const studentsAssignment = resultDoc.filter(assignment => assignment.team !== null);
+    return studentsAssignment;
 }
 
 const modifyAssignment = async (id, data) => {
@@ -32,9 +33,14 @@ const deleteAssignment = async (id) => {
     return deletedDoc;
 };
 
+const getAssignmentForClass = async(classId) =>{
+    const assignmentList = await Assignment.find({ team: classId }).populate('owner', '-password').populate('team');
+
+    return assignmentList;
+}
 const listAssignments = async (ownerID) => {
     const assignmentList = await Assignment.find({ owner: ownerID })
-        .populate('owner', '-password').populate('students', '-password');
+        .populate('owner', '-password').populate('students', '-password').populate('team');
 
     return assignmentList;
 };
@@ -52,6 +58,8 @@ module.exports = {
     deleteAssignment,
     listAssignments,
     getAllAssignments,
-    getAssignmentForStudent
+    getAssignmentForStudent,
+    getAssignmentForClass,
+    getAssignment,
 }
 

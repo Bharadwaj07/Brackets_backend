@@ -8,10 +8,22 @@ const registerUser = async(userData) =>{
 
     return userDoc;
 };
+const listAllUsers = async() =>{
+    const userList = await User.find({},{password:0});
+    return userList;
+}
+
+const modifyUserType = async (id,userType) =>{
+    const update = await User.findOneAndUpdate({_id:id},{
+        $set:{userType:userType}
+    })
+    return update;
+}
 const listStudents =async(userType)=>{
     const sudentList = await User.find({userType:userType},{password:0});
     return sudentList;
 }
+
 const loginUser = (userData) =>{
     return new Promise((resolve,reject) =>{
         User.findOne({email:userData.email,password:userData.password})
@@ -35,4 +47,6 @@ module.exports ={
     registerUser,
     loginUser,
     listStudents,
+    listAllUsers,
+    modifyUserType,
 }

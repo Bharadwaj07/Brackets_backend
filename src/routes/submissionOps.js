@@ -12,6 +12,15 @@ router.get('/:assignmentId',async(req,res) =>{
     }
 });
 
+router.get('/:assignmentId/:studentId',async(req,res) =>{
+    try {
+        const data = await submissionHandler.getSubmissionForStudent(req.params.assignmentId,req.params.studentId);
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 router.post('/',async(req,res) =>{
     try {
         const data = await submissionHandler.createSubmission(req.body);
@@ -21,9 +30,9 @@ router.post('/',async(req,res) =>{
     }
 });
 
-router.put('/:assignmentId',async(req,res) =>{
+router.put('/:id',async(req,res) =>{
     try {
-        const data = await submissionHandler.modifySubmission(req.params.assignmentId,req.body);
+        const data = await submissionHandler.modifySubmission(req.params.id,req.body);
         res.status(200).send(data);
     } catch (error) {
         res.status(500).send(error);
