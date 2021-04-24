@@ -3,6 +3,15 @@ const evaluationHandler = require('../lib/evaluation-ops');
 
 const router = express.Router();
 
+router.get('/',async(req,res) =>{
+    try {
+        const data = await evaluationHandler.listAllEvaluation();
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 router.get('/:assignmentId',async(req,res) =>{
     try {
         const data = await evaluationHandler.getAllEvaluation(req.params.assignmentId);

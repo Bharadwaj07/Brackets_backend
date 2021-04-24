@@ -7,6 +7,10 @@ const createEvaluation = async (data) => {
     const evaluationDoc = await evaluation.save();
     return evaluationDoc;
 };
+const listAllEvaluation = async () =>{
+    const listAll = await Evaluate.find({});
+    return listAll;
+}
 const getAllEvaluation = async (assignment) => {
     const  evaluationDoc= await Evaluate.find({ assignment });
     return evaluationDoc;
@@ -26,5 +30,6 @@ module.exports = {
     getAllEvaluation,
     getEvaluationForAssignmnet,
     getAllStudentEvaluation,
+    listAllEvaluation,
 }
 

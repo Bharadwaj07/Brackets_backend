@@ -3,6 +3,15 @@ const submissionHandler = require('../lib/submission-operations');
 
 const router = express.Router();
 
+router.get('/',async(req,res) =>{
+    try {
+        const data = await submissionHandler.listAllsubmissions();
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 router.get('/:assignmentId',async(req,res) =>{
     try {
         const data = await submissionHandler.listSubmission(req.params.assignmentId);

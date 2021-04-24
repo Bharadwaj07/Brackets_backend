@@ -85,7 +85,8 @@ io.sockets.on('connection', (socket) => {
     });
     socket.on('message', async(data) => {
         const messageData = { user: data.user, message: data.message }
-        io.in(data.room).emit('new message', messageData);
+        // socket.broadcast.to(data.roomId).emit('message',messageData);
+        io.in(data.roomId).emit('message_broadcast', messageData);
         try {
             await discussion.updateRoom(data.roomId,messageData);
         } catch (error) {
