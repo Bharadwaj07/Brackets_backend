@@ -7,6 +7,7 @@ router.get('/',async(req,res) =>{
     try {
         const data = await evaluationHandler.listAllEvaluation();
         res.status(200).send(data);
+        
     } catch (error) {
         res.status(500).send(error);
     }
@@ -32,7 +33,6 @@ router.get('/:student/:assignmentId',async(req,res) =>{
 
 router.get('/student/assignment/:student',async(req,res) =>{
     try {
-        console.log("eavl ==>",req.params);
         const data = await evaluationHandler.getAllStudentEvaluation(req.params.student);
         res.status(200).send(data);
     } catch (error) {

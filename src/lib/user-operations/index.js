@@ -8,6 +8,10 @@ const registerUser = async(userData) =>{
 
     return userDoc;
 };
+const getUser = async (id) =>{
+    const userDoc = await User.findOne({_id:id},{password:0});
+    return userDoc;
+}
 const listAllUsers = async() =>{
     const userList = await User.find({},{password:0});
     return userList;
@@ -49,4 +53,5 @@ module.exports ={
     listStudents,
     listAllUsers,
     modifyUserType,
+    getUser,
 }

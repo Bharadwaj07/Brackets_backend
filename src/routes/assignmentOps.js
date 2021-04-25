@@ -12,7 +12,6 @@ router.get('/:owner',async(req,res) =>{
 });
 router.get('/assignment/:id',async(req,res) =>{
     try {
-        console.log("assgn ==>",req.params)
         const data = await assignmentHandler.getAssignment(req.params.id);
         res.status(200).send(data);
     } catch (error) {
@@ -21,7 +20,6 @@ router.get('/assignment/:id',async(req,res) =>{
 });
 router.get('/class/:classId',async(req,res) =>{
     try {
-        console.log("class ==>",req.params)
         const data = await assignmentHandler.getAssignmentForClass(req.params.classId);
         res.status(200).send(data);
     } catch (error) {

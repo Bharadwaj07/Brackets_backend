@@ -9,6 +9,7 @@ const submissionOpsRouter = require('./routes/submissionOps');
 const compileRouter = require('./routes/compile');
 const evaluationRouter = require('./routes/evaluationOps');
 const disscussionRouter = require('./routes/discussion-ops');
+const branchRouter = require('./routes/branchOps');
 const verifyToken = require('./middleware/verify-token');
 require('dotenv').config();
 
@@ -34,6 +35,7 @@ app.use('/submission-operations',verifyToken,submissionOpsRouter);
 app.use('/compile',verifyToken,compileRouter);
 app.use('/evaluate',verifyToken,evaluationRouter);
 app.use('/discuss',verifyToken,disscussionRouter);
+app.use('/branch',verifyToken,branchRouter);
 
 
 module.exports = app;

@@ -16,6 +16,7 @@
     "got": "^11.8.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15",
+    "nodemailer": "^6.5.0",
     "socket.io": "^4.0.1",
     "uuid": "^8.3.2"
   }

@@ -12,7 +12,6 @@ const getRoom = async (roomId) => {
     return roomDoc;
 };
 const updateRoom = async (roomId,data) =>{
-    console.log(data);
     const resultDoc = await DiscussionRoom.findOneAndUpdate({roomId},{
         $push:{messages:data}
     });

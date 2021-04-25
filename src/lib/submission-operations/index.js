@@ -1,10 +1,25 @@
 const { Submission } = require('../../models/index');
+const {sendMail}= require('../mailing-service');
+const user  = require('../user-operations');
+const assignment = require('../assignment-operations');
 
 const createSubmission = async (data) => {
     const newSubmission = new Submission({
         ...data
     });
     const submissionDoc = await newSubmission.save();
+    const teacher = await user.getUser(submissionDoc.owner);
+    const student = await user.getUser(submissionDoc.student);
+    const assignmentData = await assignment.getAssignment(submissionDoc.assignment);
+    let recipientList= teacher.email;
+    const subject = "New Submission"
+    const message = `Assignmnet has submitted by ${student.name} for  ${assignmentData.title}
+    Thank you`
+    try {
+        const infor = await sendMail(recipientList,message,subject);
+    } catch (error) {
+        console.log(error);
+    }
     return submissionDoc;
 }
 
