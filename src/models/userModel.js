@@ -12,6 +12,11 @@ const UserSchema = new mongoose.Schema({
         required:true,
         trim:true,
     },
+    srn:{
+        type:String,
+        unique:true,
+        trim:true,
+    },
     userType:{
         type:String,
         required:true,

@@ -21,6 +21,7 @@ const SubmissionSchema = new mongoose.Schema({
     },
     submissionDate:{
         type:Date,
+        default:Date.now(),
     },
 });
 

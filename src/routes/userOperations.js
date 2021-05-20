@@ -8,9 +8,9 @@ const router = express.Router();
 router.post('/',async(req,res) =>{
     try{
         const data = await userHandler.registerUser(req.body);
-        res.status(200).send(data);
+        res.status(200).send({data,success:true});
     }catch(error){
-        res.status(500).send(error);
+        res.send(error);
     }
 });
 
@@ -49,6 +49,15 @@ router.get('/:userType',verifyToken,async(req,res) =>{
 router.patch('/:id',verifyToken,async(req,res) =>{
     try {
         const data = await userHandler.modifyUserType(req.params.id,req.body.userType);
+        res.status(200).send(data);
+    } catch (error) {
+        res.send(error);
+    }
+});
+
+router.delete('/:id',verifyToken,async(req,res) =>{
+    try {
+        const data = await userHandler.deleteUser(req.params.id);
         res.status(200).send(data);
     } catch (error) {
         res.send(error);

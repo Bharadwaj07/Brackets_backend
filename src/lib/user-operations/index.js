@@ -23,6 +23,11 @@ const modifyUserType = async (id,userType) =>{
     })
     return update;
 }
+
+const deleteUser = async (id) =>{
+    const deleted = await User.findOneAndDelete({_id:id})
+    return deleted;
+}
 const listStudents =async(userType)=>{
     const sudentList = await User.find({userType:userType},{password:0});
     return sudentList;
@@ -54,4 +59,5 @@ module.exports ={
     listAllUsers,
     modifyUserType,
     getUser,
+    deleteUser,
 }
